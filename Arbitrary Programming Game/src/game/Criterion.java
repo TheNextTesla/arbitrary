@@ -1,28 +1,99 @@
 package game;
 
+import game.Test.TestType;
+
 public final class Criterion 
 {
-	private String base;
+	private String variableName;
+	private TestType comparisonType;
+	private int numSet;
+	private boolean bitSet;
+	private String strSet;
+	
+	private String flatOutput; 
 	
 	public Criterion(String givenString)
 	{
-		base = givenString;
+		comparisonType = Test.TestType.NONE;
+		flatOutput = givenString;
+	}
+	
+	public Criterion(int numSet, String variableName)
+	{
+		comparisonType = Test.TestType.INT;
+		this.numSet = numSet;
+		this.variableName = variableName;
+	}
+	
+	public Criterion(boolean bitSet, String variableName)
+	{
+		comparisonType = Test.TestType.BOOL;
+		this.bitSet = bitSet;
+		this.variableName = variableName;
+	}
+	
+	public Criterion(String strSet, String variableName)
+	{
+		comparisonType = Test.TestType.STR;
+		this.strSet = strSet;
+		this.variableName = variableName;
+	}
+	
+	private boolean getBitSet()
+	{
+		return bitSet;
+	}
+	
+	private int getNumSet()
+	{
+		return numSet;
+	}
+	
+	private String getStrSet()
+	{
+		return strSet;
 	}
 	
 	private String getBaseString()
 	{
-		return base;
+		return flatOutput;
+	}
+	
+	public String getVariableName()
+	{
+		return variableName;
 	}
 	
 	public boolean equals(Criterion other)
 	{
-		if(other.getBaseString().equals(base))
+		switch(comparisonType)
+		{
+		case NONE:
+			return stringEquals(other);
+			
+		case INT:
+			return numSet == other.numSet;
+			
+		case BOOL:
+			return bitSet == other.bitSet;
+			
+		case STR:
+			return strSet.trim().equals(other.strSet.trim());
+		
+		default:
+			return stringEquals(other);
+		}
+	}
+	
+	private boolean stringEquals(Criterion other)
+	{
+		if(other.getBaseString().equals(flatOutput))
 		{
 			return true;
 		}
 		else
 		{
-			String[] splitArrayThis = base.trim().split("\n");
+			String[] splitArrayThis = flatOutput.trim().split("\n");
 			String[] splitArrayOther = other.getBaseString().trim().split("\n");
 			
 			for(int i = Math.min(splitArrayThis.length, splitArrayOther.length) - 1; i >= 0; i--)

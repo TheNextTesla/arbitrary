@@ -6,8 +6,11 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 
+import bsh.EvalError;
 import bsh.Interpreter;
 import control.Configuration;
+import game.Criterion;
+import game.Test;
 
 public class InteractionCodeRunner implements CodeRunner
 {
@@ -69,6 +72,121 @@ public class InteractionCodeRunner implements CodeRunner
 		}
 	}
 	
+	//Copy Start
+	
+	public boolean runGiven(Test test, int index)
+	{
+		try 
+		{
+			System.setOut(printStreamStandard);
+			interpreter.set("context", this);
+			
+			switch(test.testTypeLocal)
+			{
+			case NONE:
+				interpreter.set(test.getVariable(), null);
+				break;
+				
+			case INT:
+				interpreter.set(test.getVariable(), test.getValuesInt()[index]);
+				break;
+				
+			case BOOL:
+				interpreter.set(test.getVariable(), test.getValuesBoolean()[index]);
+				break;
+				
+			case STR:
+				interpreter.set(test.getVariable(), test.getValuesString()[index]);
+				break;
+			}
+			
+			interpreter.eval(codeLocal);
+		}
+		catch (Exception e)
+		{
+			hasFailed = true;
+			hasRun = true;
+			codeError = e.getLocalizedMessage();
+		}
+		finally
+		{
+			codeResult = new String(baos.toByteArray(), StandardCharsets.UTF_8);
+			System.setOut(Configuration.DEFAULT_PRINT_STREAM);
+			hasRun = true;
+		}
+		
+		return hasRun && !hasFailed;
+	}
+	
+	public Criterion runGivenAndGet(Test test, int index)
+	{
+		try 
+		{
+			System.setOut(printStreamStandard);
+			interpreter.set("context", this);
+			
+			switch(test.testTypeLocal)
+			{
+			case NONE:
+				interpreter.set(test.getVariable(), null);
+				break;
+				
+			case INT:
+				interpreter.set(test.getVariable(), test.getValuesInt()[index]);
+				break;
+				
+			case BOOL:
+				interpreter.set(test.getVariable(), test.getValuesBoolean()[index]);
+				break;
+				
+			case STR:
+				interpreter.set(test.getVariable(), test.getValuesString()[index]);
+				break;
+			}
+			
+			interpreter.eval(codeLocal);
+		}
+		catch (Exception e)
+		{
+			hasFailed = true;
+			hasRun = true;
+			codeError = e.getLocalizedMessage();
+		}
+		finally
+		{
+			codeResult = new String(baos.toByteArray(), StandardCharsets.UTF_8);
+			System.setOut(Configuration.DEFAULT_PRINT_STREAM);
+			hasRun = true;
+		}
+		
+		try
+		{
+			switch(test.testTypeLocal)
+			{
+			case NONE:
+				return new Criterion(codeResult == null ? codeError : codeResult);
+			
+			case INT:
+				return new Criterion(((Integer) interpreter.get(test.getVariable())).intValue(), test.getVariable());
+			
+			case BOOL:
+				return new Criterion(((Boolean) interpreter.get(test.getVariable())).booleanValue(), test.getVariable());
+			
+			case STR:
+				return new Criterion((String) interpreter.get(test.getVariable()), test.getVariable());
+			
+			default:
+				return new Criterion("");
+			}
+		}
+		catch(EvalError ee)
+		{
+			return new Criterion(codeResult == null ? codeError : codeResult);
+		}
+	}
+	
+	//Copy End
+	
 	public void update(String newData)
 	{
 		codeInputStream.patch(newData);
@@ -104,5 +222,10 @@ public class InteractionCodeRunner implements CodeRunner
 	public String getFailureMessage()
 	{
 		return codeError;
+	}
+	
+	public String getOriginCode()
+	{
+		return codeLocal;
 	}
 }

@@ -39,7 +39,7 @@ class SandboxPanel extends JPanel
 		constraint.insets = insets;
 		
 		jTextArea = new JTextArea(10, 20);
-		jCheckBoxInput = new JCheckBox("User Input?");
+		jCheckBoxInput = new JCheckBox("Responsive");
 		jButton = new JButton("Enter Code");
 		
 		constraint.gridx = 0;

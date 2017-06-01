@@ -7,10 +7,10 @@ public class Challenge
 	
 	private final String challengeTitle;
 	private final String challengeMessage;
-	private final String[] inputs;
-	private final Criterion[] outputs;
+	private final Test inputs;
+	private final Criterion outputs;
 	
-	public Challenge(String title, String message, byte low, byte high, String[] tests, Criterion[] expectations)
+	public Challenge(String title, String message, byte low, byte high, Test tests, Criterion expectations)
 	{
 		challengeTitle = title;
 		challengeMessage = message;
@@ -39,13 +39,22 @@ public class Challenge
 		return range;
 	}
 	
-	public String[] getInputs()
+	public Test getInputs()
 	{
 		return inputs;
 	}
 	
-	public Criterion[] getOutputs()
+	public Criterion getOutputs()
 	{
 		return outputs;
+	}
+	
+	public boolean equals(Challenge challenge)
+	{
+		if(challengeTitle.equals(challenge.challengeTitle))
+		{
+			return true;
+		}
+		return false;
 	}
 }

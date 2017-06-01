@@ -17,6 +17,7 @@ public final class Configuration
 	public static final short RESPONSE_FRAME_WIDTH_2 = 250;
 	public static final short RESPONSE_FRAME_HEIGHT_2 = 350;
 	public static final byte TICK_TIME = 100;
+	public static final byte INTERACTIVE_TIMEOUT = 30;
 	
 	public static final byte MAX_DIFFICULTY = 10;
 	public static final int NETWORK_TIMEOUT = 10000;

@@ -47,4 +47,30 @@ public class ChallengeIO
 		}
 		return challengeIO;
 	}
+	
+	public void removeChallenge(Challenge remove)
+	{
+		for(Challenge tempChallenge : challengeStore)
+		{
+			if(tempChallenge.equals(remove))
+			{
+				challengeStore.remove(tempChallenge);
+				return;
+			}
+		}
+	}
+	
+	public ArrayList<Challenge> getApplicableChallenges(byte range)
+	{
+		ArrayList<Challenge> tempChallenges = new ArrayList<>();
+		for(Challenge tempChallenge : challengeStore)
+		{
+			byte[] tempRange = tempChallenge.getRangeArray();
+			if(tempRange[0] <= range && tempRange[1] >= range)
+			{
+				tempChallenges.add(tempChallenge);
+			}
+		}
+		return tempChallenges;
+	}
 }
