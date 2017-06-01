@@ -67,7 +67,7 @@ public class ArbitraryCodeRunner implements CodeRunner
 			switch(test.testTypeLocal)
 			{
 			case NONE:
-				interpreter.set(test.getVariable(), null);
+				//interpreter.set(test.getVariable(), null);
 				break;
 				
 			case INT:
@@ -111,7 +111,7 @@ public class ArbitraryCodeRunner implements CodeRunner
 			switch(test.testTypeLocal)
 			{
 			case NONE:
-				interpreter.set(test.getVariable(), null);
+				//interpreter.set(test.getVariable(), null);
 				break;
 				
 			case INT:
@@ -137,6 +137,7 @@ public class ArbitraryCodeRunner implements CodeRunner
 		}
 		finally
 		{
+			
 			codeResult = new String(baos.toByteArray(), StandardCharsets.UTF_8);
 			System.setOut(Configuration.DEFAULT_PRINT_STREAM);
 			hasRun = true;
@@ -147,7 +148,7 @@ public class ArbitraryCodeRunner implements CodeRunner
 			switch(test.testTypeLocal)
 			{
 			case NONE:
-				return new Criterion(codeResult == null ? codeError : codeResult);
+				return new Criterion(new String(getByteArray().toByteArray(), StandardCharsets.UTF_8));
 			
 			case INT:
 				return new Criterion(((Integer) interpreter.get(test.getVariable())).intValue(), test.getVariable());
@@ -164,6 +165,7 @@ public class ArbitraryCodeRunner implements CodeRunner
 		}
 		catch(EvalError ee)
 		{
+			ee.printStackTrace();
 			return new Criterion(codeResult == null ? codeError : codeResult);
 		}
 	}

@@ -54,7 +54,7 @@ public final class Criterion
 		return strSet;
 	}
 	
-	private String getBaseString()
+	public String getBaseString()
 	{
 		return flatOutput;
 	}
@@ -95,6 +95,9 @@ public final class Criterion
 		{
 			String[] splitArrayThis = flatOutput.trim().split("\n");
 			String[] splitArrayOther = other.getBaseString().trim().split("\n");
+			
+			System.out.println(splitArrayThis[0]);
+			System.out.println(splitArrayOther[0]);
 			
 			for(int i = Math.min(splitArrayThis.length, splitArrayOther.length) - 1; i >= 0; i--)
 			{

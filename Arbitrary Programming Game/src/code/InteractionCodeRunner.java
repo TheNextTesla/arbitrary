@@ -120,6 +120,7 @@ public class InteractionCodeRunner implements CodeRunner
 	
 	public Criterion runGivenAndGet(Test test, int index)
 	{
+		System.out.println("Hi");
 		try 
 		{
 			System.setOut(printStreamStandard);

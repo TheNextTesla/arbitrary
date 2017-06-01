@@ -8,17 +8,19 @@ public class ImplementThread extends Thread
 {
 	private CodeRunner[] codeRunners;
 	private ResponseFrame responseFrame;
-	private Test[] testsToRun;
+
+	private Test testsToRun;
 	private Criterion[] outputsToSee;
 	private boolean[] resultsOfCriterionTests;
 	private boolean completed;
 	private int localIndex;
+	private String sendStore;
 	
-	
-	public ImplementThread(CodeRunner codeRunner, ResponseFrame responseFrame, Test[] inputs, Criterion[] outputs)
+	public ImplementThread(CodeRunner codeRunner, ResponseFrame responseFrame, Test inputs, Criterion[] outputs)
 	{
-		int localIndex = Math.min(inputs.length, outputs.length);
+		int localIndex = outputs.length;
 		codeRunners = new CodeRunner[localIndex];
+		resultsOfCriterionTests = new boolean[localIndex];
 		for(int i = 0; i < localIndex; i++)
 		{
 			codeRunners[i] = codeRunner.clone();
@@ -28,29 +30,36 @@ public class ImplementThread extends Thread
 		testsToRun = inputs;
 		outputsToSee = outputs;
 		completed = false;
+		sendStore = "";
 	}
 	
 	public void run()
 	{
-		if(localIndex == 0 && !completed)
+		
+		while(localIndex == 0 && !completed)
 		{
-			complete();
-			super.stop();
-		}
-		else
-		{
-			Criterion tempOutput = codeRunners[localIndex].runGivenAndGet(testsToRun[localIndex], localIndex);
+			Criterion tempOutput = codeRunners[localIndex].runGivenAndGet(testsToRun, localIndex);
 			resultsOfCriterionTests[localIndex] = outputsToSee[localIndex].equals(tempOutput);
-			responseFrame.getUserPanel().updateUserInterface("Test " + localIndex + ": " + (resultsOfCriterionTests[localIndex] ? "Pass" : "Fail"));
+			//responseFrame.getUserPanel().updateUserInterface("Hi");
+			sendStore += "Test " + localIndex + ": " + (resultsOfCriterionTests[localIndex] ? "Pass\n" : "Fail\n");
+			sendStore += tempOutput.getBaseString();
+			responseFrame.getUserPanel().updateUserInterface(sendStore);
+			localIndex--;
 		}
+		//responseFrame.getUserPanel().updateUserInterface(sendStore);
+		complete();
+		//super.stop();
+		
 	}
 	
 	public void complete()
 	{
 		completed = true;
-		responseFrame.getUserPanel().updateUserInterface("Finished: " + (getResult() ? "Succesfully" : "Failing"));
+		//responseFrame.getUserPanel().updateUserInterface("Finished!");
+		sendStore += "Finished: " + (getResult() ? "Succesfully" : "Failing");
+		responseFrame.getUserPanel().updateUserInterface(sendStore);
 	}
-	
+	 
 	public boolean[] getResults()
 	{
 		return resultsOfCriterionTests;
@@ -60,6 +69,7 @@ public class ImplementThread extends Thread
 	{
 		for(boolean bool : resultsOfCriterionTests)
 		{
+			System.out.println(resultsOfCriterionTests.length);
 			if(!bool)
 			{
 				return false;

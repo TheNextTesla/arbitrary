@@ -6,26 +6,38 @@ public class ChallengeIO
 {
 	private static ChallengeIO challengeIO;
 	
-	private ArrayList<Challenge> challengeStore;
+	private static ArrayList<Challenge> challengeStore;
 	
 	private static final String[] titleStore = 
 		{
-				
+				"Print-a-World"
 		};
 	
 	private static final String[] messageStore = 
 		{
-				
+				"Simply Test System.out.println() With 'Hello World!'"
 		};
 	
 	private static final byte[] lowStore = 
 		{
-				
+				1
 		};
 	
 	private static final byte[] highStore = 
 		{
-				
+				10
+		};
+	
+	private static final Test[] testStore =
+		{
+				new Test()
+		};
+	
+	private static final Criterion[][] reqStore = 
+		{
+				{
+					new Criterion("Hello World!")
+				}
 		};
 	
 	private ChallengeIO()
@@ -36,7 +48,10 @@ public class ChallengeIO
 	
 	private static void populateStore()
 	{
-		
+		for(int i = reqStore.length - 1; i >= 0; i--)
+		{
+			challengeStore.add(new Challenge(titleStore[i], messageStore[i], lowStore[i], highStore[i], true, testStore[i], reqStore[i]));
+		}
 	}
 	
 	public static ChallengeIO getInstance()
