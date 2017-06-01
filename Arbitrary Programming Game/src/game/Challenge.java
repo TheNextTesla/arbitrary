@@ -4,19 +4,21 @@ public class Challenge
 {
 	private byte lowDifficulty;
 	private byte highDifficulty;
+	private boolean standardRun;
 	
 	private final String challengeTitle;
 	private final String challengeMessage;
-	private final Test inputs;
-	private final Criterion outputs;
+	private final Test[] inputs;
+	private final Criterion[] outputs;
 	
-	public Challenge(String title, String message, byte low, byte high, Test tests, Criterion expectations)
+	public Challenge(String title, String message, byte low, byte high, boolean standard, Test[] tests, Criterion[] expectations)
 	{
 		challengeTitle = title;
 		challengeMessage = message;
 		inputs = tests;
 		outputs = expectations;
 		
+		standardRun = standard;
 		lowDifficulty = low;
 		highDifficulty = high;
 	}
@@ -31,6 +33,11 @@ public class Challenge
 		return challengeMessage;
 	}
 	
+	public boolean isStandardRun()
+	{
+		return standardRun;
+	}
+	
 	public byte[] getRangeArray()
 	{
 		byte[] range = new byte[2];
@@ -39,12 +46,12 @@ public class Challenge
 		return range;
 	}
 	
-	public Test getInputs()
+	public Test[] getInputs()
 	{
 		return inputs;
 	}
 	
-	public Criterion getOutputs()
+	public Criterion[] getOutputs()
 	{
 		return outputs;
 	}

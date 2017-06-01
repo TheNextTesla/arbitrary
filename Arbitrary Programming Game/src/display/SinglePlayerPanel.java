@@ -14,8 +14,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import code.ArbitraryCodeRunner;
+import code.ImplementThread;
 import code.InteractionCodeRunner;
 import code.MonitorThread;
+import control.Configuration;
 import game.Challenge;
 import game.ChallengeIO;
 import utilities.Settings;
@@ -80,19 +82,58 @@ class SinglePlayerPanel extends JPanel implements SettingsDependent
 				@Override
 				public void actionPerformed(ActionEvent arg0) 
 				{
-					if(jTextArea.getText() != null && !jTextArea.getText().trim().equals("") && !jCheckBoxInput.isSelected())
+					if(jTextArea.getText() != null && !jTextArea.getText().trim().equals("") && currentChallenge.isStandardRun())
 					{
 						ArbitraryCodeRunner acr = new ArbitraryCodeRunner(jTextArea.getText());
 						ResponseFrame responseFrame = new ResponseFrame("");
 							
-						new MonitorThread(acr, responseFrame).start();
+						ImplementThread it = new ImplementThread(acr, responseFrame, currentChallenge.getInputs(), currentChallenge.getOutputs());
+						it.start();
+						
+						while(!it.isDone())
+						{
+							try
+							{
+								Thread.sleep(Configuration.TICK_TIME);
+							}
+							catch(InterruptedException ie)
+							{
+								
+							}
+						}
+						
+						if(it.getResult())
+						{
+							completeCurrent();
+							updateCurrentChallenge();
+						}
+						
 					}
-					else if(jTextArea.getText() != null && !jTextArea.getText().trim().equals("") && jCheckBoxInput.isSelected())
+					else if(jTextArea.getText() != null && !jTextArea.getText().trim().equals("") && !currentChallenge.isStandardRun())
 					{
 						InteractionCodeRunner icr = new InteractionCodeRunner(jTextArea.getText());
-						ResponseFrame responseFrame = new ResponseFrame();
+						ResponseFrame responseFrame = new ResponseFrame("");
 							
-						new MonitorThread(icr, responseFrame).start();
+						ImplementThread it = new ImplementThread(icr, responseFrame, currentChallenge.getInputs(), currentChallenge.getOutputs());
+						it.start();
+						
+						while(!it.isDone())
+						{
+							try
+							{
+								Thread.sleep(Configuration.TICK_TIME);
+							}
+							catch(InterruptedException ie)
+							{
+								
+							}
+						}
+						
+						if(it.getResult())
+						{
+							completeCurrent();
+							updateCurrentChallenge();
+						}
 					}
 				}
 		});
@@ -105,6 +146,7 @@ class SinglePlayerPanel extends JPanel implements SettingsDependent
 	
 	private void completeCurrent()
 	{
+		challengeStoreLocal.remove(currentChallenge);
 		ChallengeIO.getInstance().removeChallenge(currentChallenge);
 	}
 	

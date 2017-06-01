@@ -202,4 +202,9 @@ public class ArbitraryCodeRunner implements CodeRunner
 	{
 		return codeLocal;
 	}
+	
+	public CodeRunner clone()
+	{
+		return new ArbitraryCodeRunner(getOriginCode());
+	}
 }

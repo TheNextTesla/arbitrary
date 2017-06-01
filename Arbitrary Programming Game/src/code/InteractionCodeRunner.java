@@ -228,4 +228,9 @@ public class InteractionCodeRunner implements CodeRunner
 	{
 		return codeLocal;
 	}
+	
+	public CodeRunner clone()
+	{
+		return new InteractionCodeRunner(getOriginCode());
+	}
 }

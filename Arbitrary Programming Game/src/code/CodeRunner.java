@@ -16,4 +16,5 @@ public interface CodeRunner
 	String getOriginCode();
 	String getResultMessage();
 	void update(String userResponse);
+	CodeRunner clone();
 }
