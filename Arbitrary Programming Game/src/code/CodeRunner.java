@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import game.Criterion;
 import game.Test;
 
+//Interface for the Asynchronous and Syncronous Executors
 public interface CodeRunner 
 {
 	void run();

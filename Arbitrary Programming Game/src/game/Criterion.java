@@ -2,6 +2,7 @@ package game;
 
 import game.Test.TestType;
 
+//An Expected Result of the Code
 public final class Criterion 
 {
 	private String variableName;
@@ -64,6 +65,7 @@ public final class Criterion
 		return variableName;
 	}
 	
+	//Finds equivalence for matching Criterion
 	public boolean equals(Criterion other)
 	{
 		switch(comparisonType)
@@ -85,6 +87,7 @@ public final class Criterion
 		}
 	}
 	
+	//Meant to Eliminate / n inaccuracies in code
 	private boolean stringEquals(Criterion other)
 	{
 		if(other.getBaseString().equals(flatOutput))

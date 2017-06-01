@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import control.Configuration;
 
+//Handles Complex Code User IO - Frame
 public class ResponseFrame extends JFrame
 {
 
@@ -83,11 +84,13 @@ public class ResponseFrame extends JFrame
 		return userPanel;
 	}
 	
+	//Kills Panel
 	private void stopUserPanel()
 	{
 		userPanel.finalize();
 	}
 	
+	//Suicide Frame
 	public void dispose()
 	{
 		hasClosed = true;

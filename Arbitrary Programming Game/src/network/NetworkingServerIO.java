@@ -1,5 +1,7 @@
 package network;
 
+//Networking Client
+//Abandoned
 public class NetworkingServerIO 
 {
 	private static NetworkingServerIO networkingServerIO;

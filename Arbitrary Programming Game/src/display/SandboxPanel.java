@@ -15,6 +15,7 @@ import code.ArbitraryCodeRunner;
 import code.InteractionCodeRunner;
 import code.MonitorThread;
 
+//Panel for the Sandbox
 class SandboxPanel extends JPanel
 {
 

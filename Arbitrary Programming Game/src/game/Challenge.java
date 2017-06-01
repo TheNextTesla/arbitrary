@@ -11,6 +11,7 @@ public class Challenge
 	private final Test inputs;
 	private final Criterion[] outputs;
 	
+	//Represents the Levels / Problems / Challenges
 	public Challenge(String title, String message, byte low, byte high, boolean standard, Test tests, Criterion[] expectations)
 	{
 		challengeTitle = title;
@@ -56,6 +57,7 @@ public class Challenge
 		return outputs;
 	}
 	
+	//Simple, basically foolproof equivalence
 	public boolean equals(Challenge challenge)
 	{
 		if(challengeTitle.equals(challenge.challengeTitle))

@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import control.Configuration;
 
+//Host Multiplayer Server
 public class NetworkingServer extends Thread
 {
 	public enum ServerState {FAILED, WAITING, CONNECTED, GAMING, CLOSING};
@@ -49,6 +50,7 @@ public class NetworkingServer extends Thread
 		}
 	}
 	
+	//Threading Connection Method
 	public void run()
 	{
 		/*
@@ -101,6 +103,7 @@ public class NetworkingServer extends Thread
         }
 	}
 	
+	//Self-explanatory
 	public boolean serverClose()
 	{
 		try 

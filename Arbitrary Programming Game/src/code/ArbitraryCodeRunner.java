@@ -10,6 +10,7 @@ import control.Configuration;
 import game.Criterion;
 import game.Test;
 
+// Handles the BeanShell Library Synchronously 
 public class ArbitraryCodeRunner implements CodeRunner
 {
 	private Interpreter interpreter;
@@ -34,6 +35,7 @@ public class ArbitraryCodeRunner implements CodeRunner
 		hasFailed = false;
 	}
 	
+	//Runs Code Without Thought
 	public void run()
 	{
 		try 
@@ -57,6 +59,7 @@ public class ArbitraryCodeRunner implements CodeRunner
 		}
 	}
 	
+	//Runs Code Given Some Test - Fail Testing
 	public boolean runGiven(Test test, int index)
 	{
 		try 
@@ -101,6 +104,7 @@ public class ArbitraryCodeRunner implements CodeRunner
 		return hasRun && !hasFailed;
 	}
 	
+	//Runs Code, Returning the Outputs / Changed Variables
 	public Criterion runGivenAndGet(Test test, int index)
 	{
 		try 
@@ -143,6 +147,7 @@ public class ArbitraryCodeRunner implements CodeRunner
 			hasRun = true;
 		}
 		
+		//Determines how to Create Criterion
 		try
 		{
 			switch(test.testTypeLocal)
@@ -205,6 +210,7 @@ public class ArbitraryCodeRunner implements CodeRunner
 		return codeLocal;
 	}
 	
+	//Clones the CodeRunner Type by constructing another off the same code
 	public CodeRunner clone()
 	{
 		return new ArbitraryCodeRunner(getOriginCode());

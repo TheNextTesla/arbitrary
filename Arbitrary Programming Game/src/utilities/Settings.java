@@ -2,6 +2,7 @@ package utilities;
 
 import control.Configuration;
 
+//Singleton Instace of the Settings - Only Difficulty at the Moment...
 public class Settings 
 {
 	private static Settings settings;
@@ -20,6 +21,7 @@ public class Settings
 		return settings;
 	}
 	
+	//Generic Setting Set
 	public boolean setSetting(Setting set, Object value, SettingsDependent sd)
 	{
 		switch(set)
@@ -36,6 +38,7 @@ public class Settings
 		return false;
 	}
 	
+	//Generic Settings Get
 	public Object getSetting(Setting set)
 	{
 		switch(set)

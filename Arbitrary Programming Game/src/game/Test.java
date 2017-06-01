@@ -1,5 +1,6 @@
 package game;
 
+//Some Variable to Inject into Code
 public class Test 
 {
 	//public enum TestType {NONE, NO_INPUT, NO_OUTPUT, IN_OUT};

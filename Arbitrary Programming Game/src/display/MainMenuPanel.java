@@ -1,5 +1,6 @@
 package display;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -29,6 +30,7 @@ public class MainMenuPanel extends JPanel
 	private JButton jButtonSandbox;
 	private JButton jButtonSettings;
 	
+	//Creates Main Menu Panel
 	MainMenuPanel()
 	{
 		//Creates and Sets Layout
@@ -43,6 +45,7 @@ public class MainMenuPanel extends JPanel
 		jButtonSinglePlayer.setPreferredSize(new Dimension(150, 40));
 		jButtonMultiPlayer = new JButton("MultiPlayer");
 		jButtonMultiPlayer.setPreferredSize(new Dimension(150, 40));
+		jButtonMultiPlayer.setBackground(Color.GRAY);
 		
 		try
 		{

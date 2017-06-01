@@ -97,18 +97,21 @@ class UserInteractionPanel extends JPanel  implements UserPanel
 		setVisible(true);
 	}
 	
+	//Replaces TextArea with new String
 	public void updateUserInterface(String newData)
 	{
 		responseLocal = newData;
 		jTextArea.setText(responseLocal);
 	}
 	
+	//Greys a Button and Stops Code
 	public void finalize()
 	{
 		jButton.setBackground(Color.GRAY);
 		jButton.removeActionListener(actionListener);
 	}
 	
+	//Checks for User Typing
 	public String getUserResponse()
 	{
 		if(hasEntryOccurred)

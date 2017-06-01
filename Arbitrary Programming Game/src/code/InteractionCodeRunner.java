@@ -12,6 +12,7 @@ import control.Configuration;
 import game.Criterion;
 import game.Test;
 
+//Asynchronous Code Executor - Necessary and Irritating Twin of Arbitrary
 public class InteractionCodeRunner implements CodeRunner
 {
 	private Interpreter interpreter;
@@ -46,6 +47,7 @@ public class InteractionCodeRunner implements CodeRunner
 		hasFailed = false;
 	}
 	
+	//Runs Regardless of Options
 	public void run()
 	{
 		try
@@ -72,8 +74,7 @@ public class InteractionCodeRunner implements CodeRunner
 		}
 	}
 	
-	//Copy Start
-	
+	//Runs Given Some Variable Option
 	public boolean runGiven(Test test, int index)
 	{
 		try 
@@ -118,6 +119,7 @@ public class InteractionCodeRunner implements CodeRunner
 		return hasRun && !hasFailed;
 	}
 	
+	//Runs Given an Option, Packaging a Criterion
 	public Criterion runGivenAndGet(Test test, int index)
 	{
 		System.out.println("Hi");
@@ -186,13 +188,13 @@ public class InteractionCodeRunner implements CodeRunner
 		}
 	}
 	
-	//Copy End
-	
+	//Passes along new Data
 	public void update(String newData)
 	{
 		codeInputStream.patch(newData);
 	}
 	
+	//Closes Asynchronous Streaming
 	public void setRun()
 	{
 		hasRun = true;
@@ -230,6 +232,7 @@ public class InteractionCodeRunner implements CodeRunner
 		return codeLocal;
 	}
 	
+	//Clones Based on codeLocal
 	public CodeRunner clone()
 	{
 		return new InteractionCodeRunner(getOriginCode());

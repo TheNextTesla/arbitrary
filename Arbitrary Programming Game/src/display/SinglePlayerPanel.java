@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -24,6 +25,7 @@ import utilities.Settings;
 import utilities.Settings.Setting;
 import utilities.SettingsDependent;
 
+//Runs the Panel Actions for Single-Player Mode 
 class SinglePlayerPanel extends JPanel implements SettingsDependent
 {
 
@@ -38,7 +40,7 @@ class SinglePlayerPanel extends JPanel implements SettingsDependent
 	private JLabel jLabelTitle;
 	private JLabel jLabelMessage;
 	private JTextArea jTextArea;
-	private JCheckBox jCheckBoxInput;
+	//private JCheckBox jCheckBoxInput;
 	private JButton jButton;
 	
 	SinglePlayerPanel()
@@ -82,6 +84,7 @@ class SinglePlayerPanel extends JPanel implements SettingsDependent
 				@Override
 				public void actionPerformed(ActionEvent arg0) 
 				{
+					//Uses the Code Classes to Analyze Code
 					if(jTextArea.getText() != null && !jTextArea.getText().trim().equals("") && currentChallenge.isStandardRun())
 					{
 						ArbitraryCodeRunner acr = new ArbitraryCodeRunner(jTextArea.getText());
@@ -141,7 +144,14 @@ class SinglePlayerPanel extends JPanel implements SettingsDependent
 
 	private void updateCurrentChallenge()
 	{
-		currentChallenge = challengeStoreLocal.get((int) (Math.random() * challengeStoreLocal.size()));
+		if(challengeStoreLocal.size() > 0)
+		{
+			currentChallenge = challengeStoreLocal.get((int) (Math.random() * challengeStoreLocal.size()));
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "You've completed all the challenges!");
+		}
 	}
 	
 	private void completeCurrent()

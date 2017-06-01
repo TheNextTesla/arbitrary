@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import control.Configuration;
 import display.ResponseFrame;
 
+//Monitors IO for Executors in Sandbox
 public class MonitorThread extends Thread
 {
 	private CodeRunner codeRunner;
@@ -20,6 +21,7 @@ public class MonitorThread extends Thread
 		totalICRData = "";
 	}
 	
+	//Runs on Own Thread due to Thread
 	public void run()
 	{
 		codeRunner.run();

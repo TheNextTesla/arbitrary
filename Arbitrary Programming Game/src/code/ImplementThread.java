@@ -4,6 +4,7 @@ import display.ResponseFrame;
 import game.Criterion;
 import game.Test;
 
+//Tests a Codes Cases (Tests) Against Criterion (Output)
 public class ImplementThread extends Thread
 {
 	private CodeRunner[] codeRunners;
@@ -33,10 +34,11 @@ public class ImplementThread extends Thread
 		sendStore = "";
 	}
 	
+	//Is executed on its own Thread by Thread.start()
 	public void run()
 	{
 		
-		while(localIndex == 0 && !completed)
+		while(localIndex >= 0 && !completed)
 		{
 			Criterion tempOutput = codeRunners[localIndex].runGivenAndGet(testsToRun, localIndex);
 			resultsOfCriterionTests[localIndex] = outputsToSee[localIndex].equals(tempOutput);
@@ -52,6 +54,7 @@ public class ImplementThread extends Thread
 		
 	}
 	
+	//Finishes up Interaction with User
 	public void complete()
 	{
 		completed = true;
@@ -69,7 +72,6 @@ public class ImplementThread extends Thread
 	{
 		for(boolean bool : resultsOfCriterionTests)
 		{
-			System.out.println(resultsOfCriterionTests.length);
 			if(!bool)
 			{
 				return false;

@@ -12,6 +12,7 @@ import javax.swing.JTextArea;
 import code.ArbitraryCodeRunner;
 import control.Configuration;
 
+//Simple Code Entry Panel
 public class ProgrammingPanel extends JPanel
 {
 

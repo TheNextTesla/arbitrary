@@ -63,6 +63,7 @@ class UserResponsePanel extends JPanel implements UserPanel
 		//Already not accepting user input
 	}
 	
+	//Puts in New String Data
 	public void updateUserInterface(String newData)
 	{
 		responseLocal = newData;

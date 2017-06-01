@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import control.Configuration;
 
+//Central JFrame
 public class CoreFrame extends JFrame
 {
 
@@ -24,6 +25,7 @@ public class CoreFrame extends JFrame
 	private JPanel internalPanel;
 	public enum PanelSwap {MainMenu, SinglePlayer, MultiPlayer, Settings, Sandbox}
 	
+	//GUI Setup
 	private CoreFrame()
 	{
 		//TODO: How to actually choose relative location?
@@ -90,6 +92,7 @@ public class CoreFrame extends JFrame
 		add(internalPanel);
 	}
 	
+	//Singleton Instantiation
 	public static CoreFrame getInstance()
 	{
 		if(coreFrame == null)
@@ -99,6 +102,7 @@ public class CoreFrame extends JFrame
 		return coreFrame;
 	}
 	
+	//Flips between panels
 	public void swapPanel(PanelSwap panelSwap)
 	{
 		switch(panelSwap)

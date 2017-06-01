@@ -13,6 +13,7 @@ import control.Configuration;
 import utilities.Settings;
 import utilities.SettingsDependent;
 
+//Shows the One, Lonely Setting...
 class SettingsPanel extends JPanel implements SettingsDependent
 {
 

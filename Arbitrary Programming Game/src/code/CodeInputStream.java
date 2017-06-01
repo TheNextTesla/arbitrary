@@ -3,6 +3,7 @@ package code;
 import java.io.IOException;
 import java.io.InputStream;
 
+//*Should* be a Way to Inject Strings into System.in
 public class CodeInputStream extends InputStream
 {
 	int index;
@@ -31,6 +32,7 @@ public class CodeInputStream extends InputStream
 		return (int) response;
 	}
 	
+	//Patches new String Data into the local String and Converts to Byte
 	public void patch(String patchString)
 	{
 		localCharArray += patchString;

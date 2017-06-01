@@ -3,6 +3,7 @@ package control;
 import java.io.InputStream;
 import java.io.PrintStream;
 
+//Configuration Constants File
 public final class Configuration 
 {
 	public static final String GAME_TITLE = "Arbitrary";
